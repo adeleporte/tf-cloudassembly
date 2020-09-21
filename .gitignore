@@ -1,0 +1,10 @@
+backup
+tmp
+*.tfstate*
+*.sh
+*.log
+vendor
+velocloud
+main.go
+.terraform/plugins/*
+
