@@ -10,6 +10,18 @@ variable "password" {
   type = string
 }
 
+variable "bw" {
+  type = string
+}
+
+variable "link" {
+  type = string
+}
+
+variable "ip" {
+  type = string
+}
+
 
 provider "velocloud" {
   host     = var.host
@@ -30,13 +42,13 @@ resource "velocloud_qos_rule" "tf_qos_rule" {
 
   rule {
     name            = "My VCN App"
-    dip             = "172.31.64.100"
+    dip             = var.ip
     dmask           = "255.255.255.255"
     dport           = 80
     proto           = 6
-    bandwidthpct    = "50"
+    bandwidthpct    = var.bw
     class           = "transactional"
-    servicegroup    = "ALL"
+    servicegroup    = var.link //"ALL"
   }
   
 }
