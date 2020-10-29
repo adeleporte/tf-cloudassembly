@@ -2,7 +2,7 @@ terraform {
   required_providers {
     velocloud = {
       source = "adeleporte/velocloud"
-      version = "0.2.7"
+      version = "0.2.8"
     }
   }
 }
