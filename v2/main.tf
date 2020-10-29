@@ -28,6 +28,22 @@ variable "ip" {
 }
 
 
+variable "fw_wifi" {
+  type = string
+  default = true
+}
+
+variable "fw_shops" {
+  type = string
+  default = true
+}
+
+variable "fw_fabrics" {
+  type = string
+  default = true
+}
+
+
 provider "velocloud" {
   vco     = var.host
   token    = var.token
@@ -35,6 +51,18 @@ provider "velocloud" {
 
 data "velocloud_profile" "tf_vra" {
   name         = "vra"
+}
+
+data "velocloud_address_group" "tf_wifi_customers" {
+  name = "wifi-customers"
+}
+
+data "velocloud_address_group" "tf_fabrics" {
+  name = "fabrics"
+}
+
+data "velocloud_address_group" "tf_shops" {
+  name = "shops"
 }
 
 resource "velocloud_business_policies" "tf_vra_bp" {
@@ -55,3 +83,38 @@ resource "velocloud_business_policies" "tf_vra_bp" {
   }
   
 }
+
+resource "velocloud_firewall_rules" "tf_vra_fw" {
+
+  profile = data.velocloud_profile.tf_vra.id
+  
+  firewall_status   = true
+  firewall_logging  = true
+  firewall_stateful = true
+  firewall_syslog   = true
+
+  rule {
+    name            = "vRa access for Wifi Customers"
+    s_address_group = data.velocloud_address_group.tf_wifi_customers.logicalid
+    dip             = var.ip
+    action          = var.fw_wifi
+  }
+  
+  
+  rule {
+    name            = "vRa access for Shops"
+    s_address_group = data.velocloud_address_group.tf_shops.logicalid
+    dip             = var.ip
+    action          = var.fw_shops
+  }
+  
+  
+  rule {
+    name            = "vRa access for Fabrics"
+    s_address_group = data.velocloud_address_group.tf_fabrics.logicalid
+    dip             = var.ip
+    action          = var.fw_fabrics
+  }
+  
+}
+
