@@ -98,8 +98,8 @@ resource "velocloud_firewall_rules" "tf_vra_fw" {
     
     s_address_group = data.velocloud_address_group.tf_wifi_customers.logicalid
     dip             = var.ip
-    dport_low       = 80
-    dport_high      = 80
+    d_port_low       = 80
+    d_port_high      = 80
     proto           = 6
     
     action          = var.fw_wifi
@@ -111,8 +111,8 @@ resource "velocloud_firewall_rules" "tf_vra_fw" {
     
     s_address_group = data.velocloud_address_group.tf_shops.logicalid
     dip             = var.ip
-    dport_low       = 80
-    dport_high      = 80
+    d_port_low       = 80
+    d_port_high      = 80
     proto           = 6
     
     action          = var.fw_shops
@@ -124,8 +124,8 @@ resource "velocloud_firewall_rules" "tf_vra_fw" {
     
     s_address_group = data.velocloud_address_group.tf_fabrics.logicalid
     dip             = var.ip
-    dport_low       = 80
-    dport_high      = 80
+    d_port_low       = 80
+    d_port_high      = 80
     proto           = 6
     
     action          = var.fw_fabrics
