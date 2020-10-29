@@ -30,17 +30,17 @@ variable "ip" {
 
 variable "fw_wifi" {
   type = string
-  default = true
+  default = "allow"
 }
 
 variable "fw_shops" {
   type = string
-  default = true
+  default = "allow"
 }
 
 variable "fw_fabrics" {
   type = string
-  default = true
+  default = "allow"
 }
 
 
