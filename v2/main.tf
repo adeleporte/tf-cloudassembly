@@ -95,24 +95,39 @@ resource "velocloud_firewall_rules" "tf_vra_fw" {
 
   rule {
     name            = "vRa access for Wifi Customers"
+    
     s_address_group = data.velocloud_address_group.tf_wifi_customers.logicalid
     dip             = var.ip
+    dport_low       = 80
+    dport_high      = 80
+    proto           = 6
+    
     action          = var.fw_wifi
   }
   
   
   rule {
     name            = "vRa access for Shops"
+    
     s_address_group = data.velocloud_address_group.tf_shops.logicalid
     dip             = var.ip
+    dport_low       = 80
+    dport_high      = 80
+    proto           = 6
+    
     action          = var.fw_shops
   }
   
   
   rule {
     name            = "vRa access for Fabrics"
+    
     s_address_group = data.velocloud_address_group.tf_fabrics.logicalid
     dip             = var.ip
+    dport_low       = 80
+    dport_high      = 80
+    proto           = 6
+    
     action          = var.fw_fabrics
   }
   
